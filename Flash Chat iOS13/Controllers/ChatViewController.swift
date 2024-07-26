@@ -18,7 +18,7 @@ class ChatViewController: UIViewController {
     let db = Firestore.firestore()
 
     
-    let Messages = [
+    var Messages = [
         Message(sender: "demo@gmail.com", body: "hi!"),
         Message(sender: "1@2.com", body: "hi!"),
         Message(sender: "demo@gmail.com", body: "how are you?"),
@@ -36,12 +36,21 @@ class ChatViewController: UIViewController {
     }
     
     func loadMessage (){
-        db.collection(K.FStore.collectionName).getDocuments { data, err in
+        Messages = []
+        db.collection(K.FStore.collectionName).order(by: K.FStore.dateField).addSnapshotListener { data, err in
             if let error = err {
                 print(error)
             }else {
-                print(data?.documents.first?.data())
-            }
+                self.Messages = (data?.documents.map({ QueryDocumentSnapshot in
+                    let mSender = QueryDocumentSnapshot[K.FStore.senderField] as! String
+                    let mBody = QueryDocumentSnapshot[K.FStore.bodyField] as! String
+                    return Message(sender: mSender, body: mBody)
+                }))!
+                
+                self.tableView.reloadData()
+                let indexPath = IndexPath(row: self.Messages.count - 1, section: 0)
+                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }   
         }
     }
     
@@ -50,12 +59,14 @@ class ChatViewController: UIViewController {
             db.collection(K.FStore.collectionName)
                 .addDocument(data: [
                     K.FStore.senderField : email,
-                    K.FStore.bodyField : mssg
+                    K.FStore.bodyField : mssg,
+                    K.FStore.dateField : NSDate().timeIntervalSince1970
                 ]) { error in
                     if let e = error {
                         print(e)
                     }
                 }
+            messageTextfield.text = ""
         }
     }
     
@@ -77,6 +88,20 @@ extension ChatViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
         cell.label.text = Messages[indexPath.row].body
+        
+        cell.youAvatar.isHidden = true
+        cell.meAvatar.isHidden = true
+        cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.purple)
+        cell.label.textColor = UIColor(named: K.BrandColors.lightPurple)
+        
+        if Messages[indexPath.row].sender == Auth.auth().currentUser?.email {
+            cell.meAvatar.isHidden = false
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.lightPurple)
+            cell.label.textColor = UIColor(named: K.BrandColors.purple)
+        }else {
+            cell.youAvatar.isHidden = false
+        }
+        
         return cell
     }
 }

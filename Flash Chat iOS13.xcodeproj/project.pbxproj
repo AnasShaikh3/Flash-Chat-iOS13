@@ -18,8 +18,6 @@
 		0B628191235DF01B00E35CAF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B628190235DF01B00E35CAF /* ChatViewController.swift */; };
 		0B62819E235F0F4D00E35CAF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B62819D235F0F4D00E35CAF /* README.md */; };
 		207504402C19BF3000271D65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2075043F2C19BF3000271D65 /* GoogleService-Info.plist */; };
-		207504432C19C0C900271D65 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 207504422C19C0C800271D65 /* FirebaseAuth */; };
-		207504452C19C0C900271D65 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 207504442C19C0C900271D65 /* FirebaseFirestore */; };
 		2093AEDE2C326FF900AC2F43 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2093AEDD2C326FF900AC2F43 /* MessageCell.xib */; };
 		2093AEDF2C326FF900AC2F43 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2093AEDC2C326FF900AC2F43 /* MessageCell.swift */; };
 		20DFA6092C2D656500E43B15 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DFA6082C2D656500E43B15 /* K.swift */; };
@@ -57,8 +55,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E863076A90926638A0B31F6 /* Pods_Flash_Chat_iOS13.framework in Frameworks */,
-				207504432C19C0C900271D65 /* FirebaseAuth in Frameworks */,
-				207504452C19C0C900271D65 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,8 +163,6 @@
 			);
 			name = "Flash Chat iOS13";
 			packageProductDependencies = (
-				207504422C19C0C800271D65 /* FirebaseAuth */,
-				207504442C19C0C900271D65 /* FirebaseFirestore */,
 			);
 			productName = "Flash Chat iOS13";
 			productReference = 0B628173235DEE8100E35CAF /* Flash Chat iOS13.app */;
@@ -200,7 +194,6 @@
 			);
 			mainGroup = 0B62816A235DEE8100E35CAF;
 			packageReferences = (
-				207504412C19C0C800271D65 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 0B628174235DEE8100E35CAF /* Products */;
 			projectDirPath = "";
@@ -494,30 +487,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		207504412C19C0C800271D65 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.27.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		207504422C19C0C800271D65 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 207504412C19C0C800271D65 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		207504442C19C0C900271D65 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 207504412C19C0C800271D65 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0B62816B235DEE8100E35CAF /* Project object */;
 }
